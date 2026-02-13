@@ -1,21 +1,47 @@
 <table class="patient-table">
     <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>Género</th>
-        <th>Acciones</th>
-      </tr>
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Género</th>
+        </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Uncle Jhonny</td>
-        <td>75</td>
-        <td>Masculino</td>
-      </tr>
-      <tr>
-        <td>Isaac Miramontes Coronel</td>
-        <td>82</td>
-        <td>Femenino</td>
-      </tr>
+        <tr class="patient-row" onclick="window.location.href='/patients/1'" style="cursor:pointer;">
+            <td>Uncle Jhonny</td>
+            <td>75</td>
+            <td>Masculino</td>
+        </tr>
+        <tr class="patient-row" onclick="window.location.href='/patients/2'" style="cursor:pointer;">
+            <td>Isaac Miramontes Coronel</td>
+            <td>54</td>
+            <td>Masculino</td>
+        </tr>
+        <tr class="patient-row" onclick="window.location.href='/patients/3'" style="cursor:pointer;">
+            <td>Aunt Maria</td>
+            <td>49</td>
+            <td>Femenino</td>
+        </tr>
     </tbody>
+</table>
+<style>
+    .patient-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .patient-table thead {
+        background-color: #f2f2f2;
+    }
+    .patient-table th, .patient-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    .patient-table th {
+        background-color: #f2f2f2;
+        text-align: left;
+    }
+   
+    .patient-row:hover {
+        background-color: #f1f1f1;
+    }
