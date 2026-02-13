@@ -1,29 +1,48 @@
 ---
-
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 
 export async function getStaticPaths() {
-  const patients = [
-    { id: 1, name: "Uncle Johnny" },
-    { id: 2, name: "Isaac Miramontes Coronel" },
-    { id: 3, name: "Tia Maria" }
-  ];
+    const patients = [
+        { id: 1, name: "Uncle Johnny" },
+        { id: 2, name: "Isaac Miramontes Coronel" },
+        { id: 3, name: "Tia Maria" },
+    ];
 
-  return patients.map((patient) => ({
-    params: { id: patient.id.toString() }
-  }));
+    return patients.map((patient) => ({
+        params: { id: patient.id.toString() },
+    }));
 }
 
 const { id } = Astro.params;
 
 const patients = [
-  { id: 1, name: "Uncle Johnny", age: 75, condition: "Healthy" },
-  { id: 2, name: "Isaac Miramontes Coronel", age: 54, condition: "Masculino" },
-  { id: 3, name: "Tia Maria", age: 49, condition: "Sarcastic" }
+    {
+        id: 1,
+        name: "Uncle Johnny",
+        age: 75,
+        pressureHistory: [120, 125, 118, 130],
+        weightHistory: [70, 72, 71, 73],
+    },
+    {
+        id: 2,
+        name: "Isaac Miramontes Coronel",
+        age: 54,
+        pressureHistory: [120, 125, 118, 130],
+        weightHistory: [70, 72, 71, 73],
+    },
+    {
+        id: 3,
+        name: "Tia Maria",
+        age: 49,
+        pressureHistory: [120, 125, 118, 130],
+        weightHistory: [70, 72, 71, 73],
+    },
 ];
 
-const patient = patients.find(p => p.id === Number(id));
+const patient = patients.find((p) => p.id === Number(id));
 ---
+
 <DashboardLayout title={`Detalles de ${patient?.name}`}>
-    
+    <h1>{patient?.name}</h1>
+
 </DashboardLayout>
