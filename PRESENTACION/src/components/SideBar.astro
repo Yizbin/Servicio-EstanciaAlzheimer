@@ -8,12 +8,13 @@ const currentPath = Astro.url.pathname;
       <a href="/">Inicio</a>
     </li>
 
-    <li class={`nav-item ${currentPath === "/pacientes" ? "active" : ""}`}>
-      <a href="/pacientes">Pacientes</a>
+    <li class={`nav-item ${currentPath === "/patients" ? "active" : ""}`}>
+      <a href="/patients">Pacientes</a>
     </li>
 
-    <li class={`nav-item ${currentPath === "/configuraciones" ? "active" : ""}`}>
-      <a href="/configuraciones">Configuraciones</a>
+    <li class={`nav-item ${currentPath === "/configurations" ? "active" : ""}`}>
+      <a href="/configurations">Configuraciones</a>
+
     </li>
   </ul>
 </nav>

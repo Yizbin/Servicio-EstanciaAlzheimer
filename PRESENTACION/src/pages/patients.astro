@@ -1,0 +1,25 @@
+---
+import DashboardLayout from "../layouts/DashboardLayout.astro";
+import PatientsTable from "../components/PatientsTable.astro";
+---
+
+<DashboardLayout title="Selección de Paciente">
+  <h1>Lista de Pacientes</h1>
+  <input type="text" placeholder="Buscar paciente" class="search-bar" />
+  <PatientsTable />
+  <style>
+    .h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+  </style>
+</DashboardLayout>
