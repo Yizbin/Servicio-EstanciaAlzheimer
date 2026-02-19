@@ -1,48 +1,90 @@
 ---
+// src/pages/patients/[id].astro
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import CameraRecorder from "../../components/CameraRecorder.astro";
+import Button from "../../components/RecordButton.astro";
 
-export async function getStaticPaths() {
-    const patients = [
-        { id: 1, name: "Uncle Johnny" },
-        { id: 2, name: "Isaac Miramontes Coronel" },
-        { id: 3, name: "Tia Maria" },
-    ];
-
-    return patients.map((patient) => ({
-        params: { id: patient.id.toString() },
-    }));
+// getStaticPaths es necesario en Astro para generar las rutas dinámicas en tiempo de compilación.
+export function getStaticPaths() {
+  return [
+    { params: { id: '1' }, props: { name: 'Uncle Jhonny', age: 75, gender: 'Masculino' } },
+    { params: { id: '2' }, props: { name: 'Isaac Miramontes Coronel', age: 54, gender: 'Masculino' } },
+    { params: { id: '3' }, props: { name: 'Aunt Maria', age: 49, gender: 'Femenino' } },
+  ];
 }
 
 const { id } = Astro.params;
-
-const patients = [
-    {
-        id: 1,
-        name: "Uncle Johnny",
-        age: 75,
-        pressureHistory: [120, 125, 118, 130],
-        weightHistory: [70, 72, 71, 73],
-    },
-    {
-        id: 2,
-        name: "Isaac Miramontes Coronel",
-        age: 54,
-        pressureHistory: [120, 125, 118, 130],
-        weightHistory: [70, 72, 71, 73],
-    },
-    {
-        id: 3,
-        name: "Tia Maria",
-        age: 49,
-        pressureHistory: [120, 125, 118, 130],
-        weightHistory: [70, 72, 71, 73],
-    },
-];
-
-const patient = patients.find((p) => p.id === Number(id));
+const { name, age, gender } = Astro.props;
 ---
 
-<DashboardLayout title={`Detalles de ${patient?.name}`}>
-    <h1>{patient?.name}</h1>
+<DashboardLayout title={`Perfil: ${name}`}>
+  <div class="page-container">
+    
+    <div class="patient-header">
+      <div class="info">
+        <h1>{name}</h1>
+        <p>Edad: {age} años | Género: {gender}</p>
+        <p class="patient-id">ID del paciente: #{id}</p>
+      </div>
+      <div class="actions">
+        <Button id="btnAsistencia" variant="primary">
+          Marcar Asistencia
+        </Button>
+      </div>
+    </div>
 
+    <div class="recorder-section">
+      <h2>Sesión de Grabación</h2>
+      <p class="subtitle">Asegúrate de marcar la asistencia antes de iniciar la grabación.</p>
+      <CameraRecorder />
+    </div>
+
+  </div>
 </DashboardLayout>
+
+<style>
+  .page-container {
+    padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .patient-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+  }
+
+  .patient-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+    color: #333;
+  }
+
+  .patient-header p {
+    margin: 0;
+    color: #666;
+  }
+
+  .patient-id {
+    font-size: 0.85rem;
+    color: #999 !important;
+    margin-top: 0.25rem !important;
+  }
+
+  .recorder-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+</style>
