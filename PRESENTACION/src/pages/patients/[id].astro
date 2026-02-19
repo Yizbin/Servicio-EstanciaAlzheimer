@@ -4,7 +4,6 @@ import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import CameraRecorder from "../../components/CameraRecorder.astro";
 import Button from "../../components/RecordButton.astro";
 
-// getStaticPaths es necesario en Astro para generar las rutas dinámicas en tiempo de compilación.
 export function getStaticPaths() {
   return [
     { params: { id: '1' }, props: { name: 'Uncle Jhonny', age: 75, gender: 'Masculino' } },
@@ -36,6 +35,7 @@ const { name, age, gender } = Astro.props;
     <div class="recorder-section">
       <h2>Sesión de Grabación</h2>
       <p class="subtitle">Asegúrate de marcar la asistencia antes de iniciar la grabación.</p>
+      
       <CameraRecorder />
     </div>
 
@@ -87,4 +87,76 @@ const { name, age, gender } = Astro.props;
     color: #666;
     margin-bottom: 1.5rem;
   }
+
+  /* Pequeña animación para que el punto rojo parpadee al grabar */
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnAsistencia = document.getElementById('btnAsistencia') as HTMLButtonElement | null;
+    const btnGrabar = document.getElementById('btnAccion') as HTMLButtonElement | null;
+    const placeholder = document.querySelector('.video-placeholder') as HTMLElement | null;
+    const videoFrame = document.querySelector('.video-frame') as HTMLElement | null;
+
+    let isRecording = false;
+
+
+    if (btnGrabar) {
+      btnGrabar.disabled = true;
+      btnGrabar.style.opacity = '0.5';
+      btnGrabar.style.cursor = 'not-allowed';
+    }
+
+    btnAsistencia?.addEventListener('click', () => {
+      if (btnAsistencia) {
+        btnAsistencia.innerHTML = '✓ Asistencia Marcada';
+        btnAsistencia.style.backgroundColor = '#28a745'; 
+        btnAsistencia.style.borderColor = '#28a745';
+        btnAsistencia.style.pointerEvents = 'none'; 
+      }
+
+      if (placeholder && videoFrame) {
+        videoFrame.style.backgroundColor = '#2c3e50'; 
+        videoFrame.style.border = 'none';
+        placeholder.innerHTML = '<span class="icon" style="font-size: 2rem;">🟢</span><p style="color: white;">Cámara encendida</p>';
+      }
+
+      if (btnGrabar) {
+        btnGrabar.disabled = false;
+        btnGrabar.style.opacity = '1';
+        btnGrabar.style.cursor = 'pointer';
+      }
+    });
+
+    btnGrabar?.addEventListener('click', () => {
+      if (!isRecording) {
+        if (btnGrabar) {
+          btnGrabar.innerHTML = '⏹ Detener Grabación';
+          btnGrabar.classList.remove('primary');
+          btnGrabar.classList.add('danger');
+        }
+        
+        if (placeholder) {
+          placeholder.innerHTML = '<span class="icon" style="font-size: 2rem; animation: blink 1s infinite;">🔴</span><p style="color: #ff4d4d; font-weight: bold;">Grabando...</p>';
+        }
+        isRecording = true;
+      } else {
+        if (btnGrabar) {
+          btnGrabar.innerHTML = '▶ Iniciar Grabación';
+          btnGrabar.classList.remove('danger');
+          btnGrabar.classList.add('primary');
+        }
+        
+        if (placeholder) {
+          placeholder.innerHTML = '<span class="icon" style="font-size: 2rem;">🟢</span><p style="color: white;">Cámara encendida</p>';
+        }
+        isRecording = false;
+      }
+    });
+  });
+</script>
