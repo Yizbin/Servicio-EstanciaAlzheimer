@@ -1,0 +1,101 @@
+<div class="setup-panel">
+    <h1>Inicio</h1>
+    <p>Elija al paciente:</p>
+
+    <select id="patientSelect">
+        <option value="">Seleccionar paciente</option>
+        <option value="1">Uncle Jhonny</option>
+        <option value="2">Isaac Miramontes Coronel</option>
+        <option value="3">Tía María</option>
+    </select>
+
+    <button id="goBtn">Ir a perfil</button>
+</div>
+
+<script>
+    document.getElementById("goBtn").addEventListener("click", () => {
+        const select = document.getElementById("patientSelect");
+
+        if (!(select instanceof HTMLSelectElement)) return;
+
+        const id = select.value;
+
+        if (!id) {
+            alert("Selecciona un paciente");
+            return;
+        }
+
+        window.location.href = `/patients/${id}`;
+    });
+</script>
+
+<style>
+    .setup-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 40vh;
+        padding: 2rem;
+        background: #f3f4f6;
+    }
+
+    .setup-panel {
+        background: white;
+        padding: 2rem 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 320px;
+    }
+
+    .setup-panel h1 {
+        margin: 0;
+        font-size: 1.6rem;
+        color: #111827;
+    }
+
+    .setup-panel p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 0.95rem;
+    }
+
+    select {
+        padding: 0.6rem 0.7rem;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        font-size: 0.95rem;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    select:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+    }
+
+    button {
+        margin-top: 0.5rem;
+        padding: 0.65rem;
+        border: none;
+        border-radius: 10px;
+        background: #2563eb;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+        box-shadow: 0 5px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    button:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+</style>

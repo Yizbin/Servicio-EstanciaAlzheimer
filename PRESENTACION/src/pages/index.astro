@@ -1,16 +1,12 @@
 ---
 // src/pages/index.astro
 import DashboardLayout from "../layouts/DashboardLayout.astro";
+import SetupPanel from "../components/SetupPanel.astro";
 ---
 
 <DashboardLayout title="Inicio">
   <div class="dashboard-container">
-    <div class="welcome-card">
-      <h1>Bienvenido al Sistema</h1>
-      <p>Para comenzar una grabación o marcar asistencia, por favor selecciona un paciente.</p>
-      
-      <a href="/patients" class="btn-link">Ir a Lista de Pacientes</a>
-    </div>
+      <SetupPanel />
   </div>
 </DashboardLayout>
 
@@ -21,43 +17,5 @@ import DashboardLayout from "../layouts/DashboardLayout.astro";
     justify-content: center;
     align-items: center;
     height: 60vh;
-  }
-
-  .welcome-card {
-    text-align: center;
-    background: white;
-    padding: 3rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    border: 1px solid #eee;
-    max-width: 500px;
-  }
-
-  .welcome-card h1 {
-    margin-bottom: 1rem;
-    color: #333;
-  }
-
-  .welcome-card p {
-    color: #666;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-  }
-
-  .btn-link {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-
-  .btn-link:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
   }
 </style>
