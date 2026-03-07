@@ -1,5 +1,5 @@
 ---
-// src/pages/patients/[id].astro
+// src/pages/capturePatient/[id].astro
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import CameraRecorder from "../../components/CameraRecorder.astro";
 import Button from "../../components/RecordButton.astro";
@@ -25,6 +25,18 @@ const { name, age, gender } = Astro.props;
         <p>Edad: {age} años | Género: {gender}</p>
         <p class="patient-id">ID del paciente: #{id}</p>
       </div>
+      <div class="actions">
+        <Button id="btnAsistencia" variant="primary">
+          Marcar Asistencia
+        </Button>
+      </div>
+    </div>
+
+    <div class="recorder-section">
+      <h2>Sesión de Grabación</h2>
+      <p class="subtitle">Asegúrate de marcar la asistencia antes de iniciar la grabación.</p>
+      
+      <CameraRecorder />
     </div>
 
   </div>
