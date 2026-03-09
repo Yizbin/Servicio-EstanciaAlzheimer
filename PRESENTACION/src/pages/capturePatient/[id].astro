@@ -3,6 +3,7 @@
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import CameraRecorder from "../../components/CameraRecorder.astro";
 import Button from "../../components/RecordButton.astro";
+import "../../css/capturePatient.css";
 
 export function getStaticPaths() {
   return [
@@ -41,60 +42,6 @@ const { name, age, gender } = Astro.props;
 
   </div>
 </DashboardLayout>
-
-<style>
-  .page-container {
-    padding: 1rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  .patient-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    padding: 1.5rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    margin-bottom: 2rem;
-    border: 1px solid #eee;
-  }
-
-  .patient-header h1 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.8rem;
-    color: #333;
-  }
-
-  .patient-header p {
-    margin: 0;
-    color: #666;
-  }
-
-  .patient-id {
-    font-size: 0.85rem;
-    color: #999 !important;
-    margin-top: 0.25rem !important;
-  }
-
-  .recorder-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .subtitle {
-    color: #666;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Pequeña animación para que el punto rojo parpadee al grabar */
-  @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
-  }
-</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

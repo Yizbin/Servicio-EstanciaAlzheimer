@@ -6,10 +6,17 @@ interface Props {
 const { title } = Astro.props as Props;
 ---
 
-<div class="topbar">
-  <div class="avatar"></div>
-  <h1>{title}</h1>
-</div>
+<html lang="es-mx">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="avatar"></div>
+      <h1>{title}</h1>
+    </div>
+  </body>
+</html>
 
 <style>
   .topbar {
