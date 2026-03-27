@@ -6,14 +6,11 @@ import WebRTCViewer from "../backend/VideoReceiver";
 ---
 
 <div class="camera-card">
-  
   <div class="video-frame">
-    <video id="videoPreview" autoplay playsinline muted src="http://10.1.8.24:8889/cam1/">
-
+    <video id="videoPreview" autoplay playsinline muted controls>
       <!-- AQUI VA EL VIDEO NIÑO -->
-      
     </video>
-    
+
     <div class="video-placeholder">
       <span class="icon">📷</span>
       <p>Vista previa de cámara</p>
@@ -21,11 +18,8 @@ import WebRTCViewer from "../backend/VideoReceiver";
   </div>
 
   <div class="actions">
-    <Button id="btnAccion">
-      Iniciar Grabación
-    </Button>
+    <Button id="btnAccion"> Iniciar Grabación </Button>
   </div>
-
 </div>
 
 <style>
@@ -33,7 +27,7 @@ import WebRTCViewer from "../backend/VideoReceiver";
     background: white;
     padding: 1.5rem;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* Sombra suave y elegante */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Sombra suave y elegante */
     border: 1px solid #eee;
     max-width: 700px;
     margin: 0 auto;
@@ -45,11 +39,11 @@ import WebRTCViewer from "../backend/VideoReceiver";
   .video-frame {
     width: 100%;
     aspect-ratio: 16 / 9;
-    background-color: #f8f9fa; /* Gris muy claro en lugar de negro puro */
+    background-color: #f8f9fa;
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    border: 2px dashed #dee2e6; /* Borde punteado indicando "zona vacía" */
+    border: 2px dashed #dee2e6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,3 +77,18 @@ import WebRTCViewer from "../backend/VideoReceiver";
     justify-content: center;
   }
 </style>
+
+<script>
+  import Hls from "hls.js";
+
+  const video = document.getElementById("videoPreview") as HTMLVideoElement;
+  const videoSrc = "http://10.1.8.24:8888/cam1/index.m3u8";
+
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
+  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    video.src = videoSrc;
+  }
+</script>

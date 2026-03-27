@@ -1,8 +1,6 @@
 ---
 // src/pages/patients/[id].astro
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
-import CameraRecorder from "../../components/CameraRecorder.astro";
-import Button from "../../components/RecordButton.astro";
 
 export function getStaticPaths() {
   return [
@@ -74,13 +72,6 @@ const { name, age, gender } = Astro.props;
   .subtitle {
     color: #666;
     margin-bottom: 1.5rem;
-  }
-
-  /* Pequeña animación para que el punto rojo parpadee al grabar */
-  @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
   }
 </style>
 
